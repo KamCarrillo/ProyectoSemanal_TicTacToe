@@ -29,6 +29,7 @@
       }
       return null
     }
+
     const ganador = computed(() => calculateWinner(tablero.value.flat()));
 
     const jugada = (x,y) => {
@@ -62,30 +63,41 @@
 	  </h1>
 
     <!--JUGADOR-->
-    <h3 className="text-xl mb-3">Turno de "{{ jugador }}"</h3>
+    <div className="flex flex-col  justify-center align-middle mb-4">
+      <div className="border border-4 h-32 w-80  rounded-xl mx-auto">
+        <h3 className="text-2xl mb-2">Turno de:</h3>
+        <img className="mx-auto object-scale-down" v-if="jugador === 'X'" src="./assets/icons/icon-x.svg" alt="X">
+        <img className="mx-auto object-scale-down" v-if="jugador === 'O'" src="./assets/icons/icon-o.svg" alt="O">
+      </div>
+    </div>
 
     <!--GRID-->
     <div className="flex flex-col items-center mb-8">
       <!--TABLERO-->  
       <div v-for="(fila,x) in tablero" :key="x" className="flex">
         <div v-for="(col,y) in fila" :key="y"
-        className="m-1 border border-white w-20 h-20 rounded-xl hover:bg-blue-950
-        flex items-center justify-center material-icons-outlined text-4xl cursor-pointer"
+        className="m-2 border border-4 border-white w-24 h-24 rounded-xl 
+        cursor-pointer hover:bg-blue-950
+        flex items-center justify-center "
         @click="jugada(x,y)">
-
-            {{ col ==="X" ? "close" : col === "O" ? "circle" : "" }}
-
+            <img v-if="col === 'X'" src="./assets/icons/icon-x.svg" alt="X">
+            <img v-if="col === 'O'" src="./assets/icons/icon-o.svg" alt="O">
         </div>
       </div>
     </div>
 
     <!--DISPLAY DE GANADOR--> 
     <div v-show="ganador">
-      <h3 className="text-4xl font-bold mb-8"> El ganador es "{{ganador}}" !!</h3>
+      <h3 className="text-6xl font-bold mb-8"> El ganador es "{{ganador}}" !!</h3>
     </div>
-    <!--BOTON DE REINICIO--> 
-    <button type="button" className="border border-white
-     w-20 h-10 rounded-xl" @click="reset()">Reset</button>
+
+    <!--BOTON REINICIO-->
+    <div className="flex flex-col items-center">
+      <img className="border border-white cursor-pointer hover:bg-yellow-500 border-2
+       object-center rounded-xl w-10 h-10 object-scale-down border-dashed bg-cyan-500" 
+       src="./assets/icons/icon-restart.svg" alt="Reset" @click="reset()"> 
+    </div>
+
   </main>
 	
 </template>
