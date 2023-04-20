@@ -1,3 +1,5 @@
+import Button from '../components/Button.vue'
+
 <script setup>
     import { ref , computed } from 'vue'
 
@@ -97,8 +99,11 @@
        object-center rounded-xl w-10 h-10 object-scale-down border-dashed bg-cyan-500" 
        src="./assets/icons/icon-restart.svg" alt="Reset" @click="reset()"> 
     </div>
-
+    <div>
+      <Button :onClick="handleClick" icon = ""></Button>
+    </div>
   </main>
+ 
 	
 </template>
 
