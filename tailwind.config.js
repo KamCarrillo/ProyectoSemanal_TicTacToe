@@ -5,7 +5,35 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        'blue':{
+          100: '#65E9E4#',
+          200: '#31C3BD', 
+          300: '#1F3641',
+          400: '#1A2A33',
+        },
+        'yellow':{
+          100:'#FFC860',
+          200:'#F2B137',
+        },
+        'gray':{
+          100:'#1F3641',
+          200:'#A8BFC9',
+        },
+      },
+
+      backgroundImage:{
+        'o': 'url("./src/assets/icons/icon-o.svg")',
+        'o_outline': 'url("./src/assets/icons/icon-o-outline.svg")',
+        'x': 'url("./src/assets/icons/icon-x.svg")',
+        'x_outline': 'url("./src/assets/icons/icon-x-outline")',
+        'restart': 'url("./src/assets/icons/icon-restart.svg")',
+        'logo': 'url("./src/assets/icons/icon-logo.svg")',
+      }
+    },
   },
-  plugins: [],
+  plugins: [
+    require("./src/theme/image.js")
+  ],
 }
