@@ -3,6 +3,8 @@
 
     const jugador= ref("X");
 
+    const showOutline = ref(false)
+
     const tablero = ref([
       ["","",""],
       ["","",""],
@@ -28,6 +30,7 @@
         }
       }
       return null
+
     }
 
     const ganador = computed(() => calculateWinner(tablero.value.flat()));
@@ -53,7 +56,7 @@
 </script>
 
 <template>
-  <main className="pt-8 text-center  bg-blue-400 min-h-screen text-white">
+  <main class="pt-8 text-center  bg-blue-400 min-h-screen text-white">
     <!--TABLERO-->
     <div class="tablero">
         
@@ -85,10 +88,14 @@
       </div>
 
       <!--CASILLAS-->
-      <div v-for="(fila,x) in tablero" :key="x" className="tablero__fila">
-        <div v-for="(col,y) in fila" :key="y" className="tablero__fila__casilla hover:bg-yellow-500" @click="jugada(x,y)">
+      <div v-for="(fila,x) in tablero" :key="x" class="tablero__fila">
+        <div v-for="(col,y) in fila" :key="y" class="tablero__fila__casilla"
+         @click="jugada(x,y)" @mouseenter="showOutline=true" @mouseleave="showOutline=false">
             <img class="object-scale-down" v-if="col === 'X'" src="./assets/icons/icon-x.svg" alt="X">
             <img class="object-scale-down" v-if="col === 'O'" src="./assets/icons/icon-o.svg" alt="O">
+
+            <img class="object-scale-down" v-show="showOutline && !ganador" v-if="jugador === 'X' && col===''" src="./assets/icons/icon-x-outline.svg" alt="">
+            <img class="object-scale-down" v-show="showOutline && !ganador" v-if="jugador === 'O' && col===''" src="./assets/icons/icon-o-outline.svg" alt="">
         </div>
       </div>
 
@@ -101,7 +108,7 @@
 
     <!--DISPLAY DE GANADOR--> 
     <div v-show="ganador">
-      <h3 className="text-6xl font-bold mb-8"> El ganador es "{{ganador}}" !!</h3>
+      <h3 class="text-6xl font-bold mb-8"> El ganador es "{{ganador}}" !!</h3>
     </div>
 
   </main>
