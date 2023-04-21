@@ -14,7 +14,5 @@ defineProps({
 
 <template>
   <button type="button" v-on:click="onClick" v-bind:class="className">
-    <svg v-if="icon"  class="w-5 h-5 icon" :class="icon" alt=""></svg>
-    <slot></slot>
   </button>
 </template>
