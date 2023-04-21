@@ -18,7 +18,7 @@ module.exports = {
           200:'#F2B137',
         },
         'gray':{
-          100:'#1F3641',
+          100:'#DBE8ED',
           200:'#A8BFC9',
         },
       },
@@ -27,13 +27,14 @@ module.exports = {
         'o': 'url("./src/assets/icons/icon-o.svg")',
         'o_outline': 'url("./src/assets/icons/icon-o-outline.svg")',
         'x': 'url("./src/assets/icons/icon-x.svg")',
-        'x_outline': 'url("./src/assets/icons/icon-x-outline")',
+        'x_outline': 'url("./src/assets/icons/icon-x-outline.svg")',
         'restart': 'url("./src/assets/icons/icon-restart.svg")',
-        'logo': 'url("./src/assets/icons/icon-logo.svg")',
+        'logo': 'url("./src/assets/icons/logo.svg")',
       }
     },
   },
   plugins: [
-    require("./src/theme/image.js")
+    require("./src/theme/image.js"),
+    require("./src/theme/tablero.js")
   ],
 }
