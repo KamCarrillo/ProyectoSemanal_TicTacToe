@@ -1,3 +1,5 @@
+import Button from '../components/Button.vue'
+
 <script setup>
     import { ref , computed } from 'vue'
 
@@ -104,7 +106,9 @@
       <h3 className="text-6xl font-bold mb-8"> El ganador es "{{ganador}}" !!</h3>
     </div>
 
+
   </main>
+ 
 	
 </template>
 
