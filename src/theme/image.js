@@ -9,26 +9,34 @@ module.exports = plugin(function ({ addComponents, theme }){
             "&_o": {
                 backgroundImage: theme('backgroundImage.o'),
                 backgroundRepeat: 'no-repeat',
+                backgroundPosition: "center",
             },
             "&_o_outline": {
                 backgroundImage: theme('backgroundImage.o_outline'),
                 backgroundRepeat: 'no-repeat',
+                backgroundPosition: "center",
+                //backgroundSize: 'auto',
             },
             "&_x": {
-                backgroundImage: theme("backgroundImage.x"),
+                backgroundImage: theme('backgroundImage.x'),
                 backgroundRepeat: 'no-repeat',
+                backgroundPosition: "center", 
+                
             },
             "&_x_outline": {
-                backgroundImage: theme("backgroundImage.x_outline"),
+                backgroundImage: theme('backgroundImage.x_outline'),
                 backgroundRepeat: 'no-repeat',
+                backgroundPosition: "center",
             },
-            "restart": {
-                backgroundImage: theme("backgroundImage.restart"),
+            "&_restart": {
+                backgroundImage: theme('backgroundImage.restart'),
                 backgroundRepeat: 'no-repeat',
+                backgroundPosition: "center", 
             },
-            "logo": {
-                backgroundImage: theme("backgroundImage.logo"),
+            "&_logo": {
+                backgroundImage: theme('backgroundImage.logo'),
                 backgroundRepeat: 'no-repeat',
+                
             },
         },
     })
