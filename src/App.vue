@@ -91,13 +91,16 @@ import Button from '../components/Button.vue'
 
       <!--CASILLAS-->
       <div v-for="(fila,x) in tablero" :key="x" class="tablero__fila">
-        <div v-for="(col,y) in fila" :key="y" class="tablero__fila__casilla"
+        <div v-for="(col,y) in fila" :key="y" class="tablero__fila__casilla :"
+        :class="{'icon_x_outline':jugador==='X' && showOutline===true && col==='',
+        'icon_o_outline':jugador==='O' && showOutline===true && col===''}"
          @click="jugada(x,y)" @mouseenter="showOutline=true" @mouseleave="showOutline=false">
             <img class="object-scale-down" v-if="col === 'X'" src="./assets/icons/icon-x.svg" alt="X">
             <img class="object-scale-down" v-if="col === 'O'" src="./assets/icons/icon-o.svg" alt="O">
-
+            <!--
             <img class="object-scale-down" v-show="showOutline && !ganador" v-if="jugador === 'X' && col===''" src="./assets/icons/icon-x-outline.svg" alt="">
             <img class="object-scale-down" v-show="showOutline && !ganador" v-if="jugador === 'O' && col===''" src="./assets/icons/icon-o-outline.svg" alt="">
+            -->
         </div>
       </div>
 
