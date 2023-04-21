@@ -103,20 +103,21 @@ import Button from '../components/Button.vue'
       </div>
     </div>
     <!--DISPLAY DE GANADOR--> 
+
     <div v-if="isGameOver" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div class="bg-blue-400 shadow-lg rounded-lg p-6 w-3/4">
         <div>
-          <h3 class="text-2x1 font-bold mb-1 mt-10 p">Juagor {{ ganador }} ganó</h3>
+          <h3 class="text-2x1 font-bold">PLAYER {{ ganador }} WON</h3>
         </div>
         <h2 class="text-4xl font-bold text-bg-blue-400 mb-0 mt-12 flex items-center justify-center" v-if="ganador">
           <img class="m-8" v-if="ganador === 'X'" src="./assets/icons/icon-x.svg">
           <img class="m-8" v-else-if="ganador === 'O'" src="./assets/icons/icon-o.svg">
-          <span class="text-center" :style="{ color: ganador === 'X' ? '#65E9E4' : '#F2B137' }">TOMA LA RONDA</span>
+          <span class="text-center" :style="{ color: ganador === 'X' ? '#65E9E4' : '#F2B137' }">TAKES THE ROUND</span>
         </h2>
-        <Button class="bg-gray-300 text-gray-800 py-2 px-4 h-14 rounded-lg border-none m-8 text-lg font-bold cursor-pointer shadow-md hover:bg-yellow-500 hover:text-white focus:outline-none" v-on:click="reset()">
+        <Button class="bg-gray-300 text-gray-800 py-2 px-4 h-14 rounded-lg border-none m-8 text-lg font-bold cursor-pointer shadow-md hover:bg-yellow-500 hover:text-gray-700 focus:outline-none" v-on:click="reset(); isGameOver=false">
           Quitar
         </Button>
-        <Button class="bg-yellow-400 text-gray-700 py-1 px-4 h-14 rounded-md border-none text-lg font-bold cursor-pointer shadow-md" v-on:click="reset()">
+        <Button class="bg-yellow-400 text-gray-800 py-1 px-4 h-14 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-gray-100" v-on:click="reset(); isGameOver=false">
           Siguiente Ronda
         </Button>
       </div>
@@ -126,19 +127,3 @@ import Button from '../components/Button.vue'
   </main>
 </template>
 
-<style>
-
-.Quitar {
-  background-color: #A8BFC9;
-  color: #295e77;
-  padding: 1rem 1rem;
-  height: 3.5rem;
-  border-radius: 1rem;
-  border: none;
-  margin: 2rem;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 2px 2px 2px 2px rgba(13, 1, 1, 0.2);
-}
-</style>
