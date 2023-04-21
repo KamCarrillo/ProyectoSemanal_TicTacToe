@@ -104,21 +104,25 @@ import Button from '../components/Button.vue'
     </div>
     <!--DISPLAY DE GANADOR--> 
     <div v-if="isGameOver" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div class="bg-gray-100 shadow-lg rounded-lg p-6 w-3/4">
-        <h2 class="text-4xl font-bold text-red-500 mb-4" v-if="ganador">¡{{ ganador }} ha ganado!</h2>
-        <img class="object-center rounded-xl w-10 h-10 object-scale-down border-dashed bg-cyan-500"
-              src="./assets/icons/icon-restart.svg" alt="Reset" @click="reset()">
-        <Button class="bg-yellow-400 text-gray-700 py-1 px-4 h-14 rounded-md border-none text-lg font-bold cursor-pointer shadow-md" v-on:click="reset()">
-        Quitar
+      <div class="bg-blue-400 shadow-lg rounded-lg p-6 w-3/4">
+        <div>
+          <h3 class="text-2x1 font-bold mb-1 mt-10 p">Juagor {{ ganador }} ganó</h3>
+        </div>
+        <h2 class="text-4xl font-bold text-bg-blue-400 mb-0 mt-12 flex items-center justify-center" v-if="ganador">
+          <img class="m-8" v-if="ganador === 'X'" src="./assets/icons/icon-x.svg">
+          <img class="m-8" v-else-if="ganador === 'O'" src="./assets/icons/icon-o.svg">
+          <span class="text-center" :style="{ color: ganador === 'X' ? '#65E9E4' : '#F2B137' }">TOMA LA RONDA</span>
+        </h2>
+        <Button class="bg-gray-300 text-gray-800 py-2 px-4 h-14 rounded-lg border-none m-8 text-lg font-bold cursor-pointer shadow-md hover:bg-yellow-500 hover:text-white focus:outline-none" v-on:click="reset()">
+          Quitar
         </Button>
         <Button class="bg-yellow-400 text-gray-700 py-1 px-4 h-14 rounded-md border-none text-lg font-bold cursor-pointer shadow-md" v-on:click="reset()">
-        Siguiente Ronda
+          Siguiente Ronda
         </Button>
       </div>
     </div>
-    <div v-show="ganador && !isGameOver">
-      <h3 class="text-6xl font-bold mb-8">El ganador es "{{ ganador }}"!!</h3>
-    </div>
+    
+    
   </main>
 </template>
 
@@ -126,7 +130,7 @@ import Button from '../components/Button.vue'
 
 .Quitar {
   background-color: #A8BFC9;
-  color: #1A2A33;
+  color: #295e77;
   padding: 1rem 1rem;
   height: 3.5rem;
   border-radius: 1rem;
