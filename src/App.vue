@@ -1,7 +1,9 @@
-import Button from '../components/Button.vue'
+import Button from '/components/Button.vue'
+import GameOver from '/components/GameOver.vue'
 
 <script setup>
     import { ref , computed } from 'vue'
+    import GameOver from './components/GameOver.vue'
 
     const jugador= ref("X");
 
@@ -10,7 +12,6 @@ import Button from '../components/Button.vue'
       ["","",""],
       ["","",""]
     ])
-
     const calculateWinner = (tablero) => {
       const lines = [
         [0, 1, 2],
@@ -29,19 +30,29 @@ import Button from '../components/Button.vue'
           return tablero[a]
         }
       }
+      if(!tablero.some(row => row.includes(''))){
+        return 'Empate'
+      }
+
       return null
     }
 
     const ganador = computed(() => calculateWinner(tablero.value.flat()));
 
+    const gameOver = ref(false)
+
     const jugada = (x,y) => {
       if (ganador.value) return;
       
-
       if (tablero.value[x][y] !== "") return;
-      
-
+    
       tablero.value [x][y] = jugador.value;
+
+      const nuevoGanador = calculateWinner(tablero.value.flat())
+
+      if(nuevoGanador || !tablero.value.some(row => row.includes(''))){
+        gameOver.value = true
+      }
 
       jugador.value = jugador.value === "X" ? "O" : "X";
     }
@@ -52,8 +63,8 @@ import Button from '../components/Button.vue'
         ["","",""],
         ["","",""]
       ];
-
       jugador.value="X"
+      gameOver = false
     }
 </script>
 
@@ -92,7 +103,6 @@ import Button from '../components/Button.vue'
     <div v-show="ganador">
       <h3 className="text-6xl font-bold mb-8"> El ganador es "{{ganador}}" !!</h3>
     </div>
-
     <!--BOTON REINICIO-->
     <div className="flex flex-col items-center">
       <img className="border border-white cursor-pointer hover:bg-yellow-500 border-2
@@ -100,7 +110,7 @@ import Button from '../components/Button.vue'
        src="./assets/icons/icon-restart.svg" alt="Reset" @click="reset()"> 
     </div>
     <div>
-      <Button :onClick="handleClick" icon = ""></Button>
+    
     </div>
   </main>
  
