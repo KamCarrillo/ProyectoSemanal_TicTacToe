@@ -114,12 +114,13 @@ import Button from '../components/Button.vue'
           <img class="m-8" v-else-if="ganador === 'O'" src="./assets/icons/icon-o.svg">
           <span class="text-center" :style="{ color: ganador === 'X' ? '#65E9E4' : '#F2B137' }">TAKES THE ROUND</span>
         </h2>
-        <Button class="bg-gray-300 text-gray-800 py-2 px-4 h-14 rounded-lg border-none m-8 text-lg font-bold cursor-pointer shadow-md hover:bg-yellow-500 hover:text-gray-700 focus:outline-none" v-on:click="reset(); isGameOver=false">
-          Quitar
+       <div>
+        <router-link to="/home" class="w-1/2 bg-gray-100 text-gray-800 py-1 px-4 h-12 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-yellow-400">QUITAR</router-link>
+        <router-view/>
+        <Button class="bg-yellow-400 text-gray-800 py-1 px-4 h-14 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-gray-100 m-7" v-on:click="reset(); isGameOver=false">
+          NEXT ROUND
         </Button>
-        <Button class="bg-yellow-400 text-gray-800 py-1 px-4 h-14 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-gray-100" v-on:click="reset(); isGameOver=false">
-          Siguiente Ronda
-        </Button>
+       </div>
       </div>
     </div>
     
