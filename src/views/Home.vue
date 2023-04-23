@@ -11,8 +11,9 @@
     
         </div>
         <div>
-            <Button  class="bg-yellow-400 text-gray-800 py-1 px-4 h-14 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-gray-100">NEW GAME (VS CPU)</Button>
-            <Button  class="bg-blue-200 text-gray-800 py-1 px-4 h-14 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-gray-100">NEW GAME (VS PLAYER)</Button>
+            <router-link to="/" class="w-1/2 bg-yellow-400 text-gray-800 py-1 px-4 h-12 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:hover:bg-gray-100">NEW GAME (VS CPU)</router-link>
+            <router-link to="/" class="w-1/2 bg-blue-200 text-gray-800 py-1 px-4 h-12 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:hover:bg-gray-100">NEW GAME (VS PLAYER)</router-link>
+            <router-view/>
         </div>
     </div>
     </main>
