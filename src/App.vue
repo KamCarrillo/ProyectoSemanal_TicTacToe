@@ -77,7 +77,6 @@ import Button from '../components/Button.vue'
         </div>
         <div class="fila__div"> <!--TURNO-->
           <span class="fila__div--turno items-center">
-            <!--<svg class="h-10 w-10 " url="./assets/icons/icon-o.svg"></svg>-->
             <img class="object-scale-down h-5 h-5 filter grayscale " v-if="jugador === 'X'" src="./assets/icons/icon-x.svg" alt="X">
             <img class="object-scale-down h-5 h-5 filter grayscale" v-if="jugador === 'O'" src="./assets/icons/icon-o.svg" alt="O">
             <p>TURN</p>
@@ -123,8 +122,6 @@ import Button from '../components/Button.vue'
        </div>
       </div>
     </div>
-    
-    
   </main>
 </template>
 

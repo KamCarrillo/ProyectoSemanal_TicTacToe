@@ -7,12 +7,19 @@ import Home from './views/Home.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/home', component: Home },
+        { 
+            path: '/home', 
+            name:'home',
+            component: Home 
+        },
+        {
+            path: '/',
+            name: 'game',
+            component: App
+        }
     ],
 });
 
 const app = createApp(App);
 app.use(router);
 app.mount('#app');
-
-createApp(App).mount('#app')
