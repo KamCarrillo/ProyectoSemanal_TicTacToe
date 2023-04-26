@@ -1,27 +1,26 @@
-import Button from '../components/Button.vue'
-
 <script setup>
     import { ref , computed } from 'vue'
     import GameOver from './components/modals/GameOver.vue'
 
     const jugador= ref("X");
 
+    const contX= ref(0)
+    const contO= ref(0)
+    const contTie= ref(0)
+
+    const showOutline= ref(false)
+
     const tablero = ref([
-      ["","",""],
-      ["","",""],
-      ["","",""]
+      ["","",""], //0 1 2
+      ["","",""], //3 4 5
+      ["","",""]  //6 7
     ])
 
     const calculateWinner = (tablero) => {
-      const lines = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
+      const lines = [//Condiciones de victoria
+        [0, 1, 2],[3, 4, 5],[6, 7, 8],  //Horizontal
+        [0, 3, 6],[1, 4, 7],[2, 5, 8],  //Vertical
+        [0, 4, 8],[2, 4, 6] //Diagonal
       ]
 
       for (let i = 0; i < lines.length; i++) {
@@ -45,8 +44,15 @@ import Button from '../components/Button.vue'
 
       if(calculateWinner(tablero.value.flat())){
         isGameOver.value = true;
+        //console.log(jugador.value);
+        if(jugador.value==='X'){
+          contX.value++;
+        }else if(jugador.value==='O'){
+          contO.value++;
+        }
       }else if(tablero.value.flat().every((val)=>val!= "")){
         isGameOver.value = true;
+        contTie.value++;
       }
 
 
@@ -68,39 +74,55 @@ import Button from '../components/Button.vue'
   <main className="pt-8 text-center  bg-blue-400 min-h-screen text-white">
     <!--TABLERO-->
     <div class="tablero">
-      <!--MENU SUPERIOR-->
-      <div class="tablero__fila flex-row">
-        <div class="fila__div"> <!--LOGO-->
-          <span class="fila__div--logo">
-            <svg class="icon_logo"></svg>
-          </span>
+        
+        <!--MENU SUPERIOR-->
+        <div class="tablero__fila flex-row">
+  
+          <div class="fila__div"> <!--LOGO-->
+            <span class="fila__div--logo">
+              <svg class="icon_logo"></svg>
+            </span>
+          </div>
+  
+          <div class="fila__div"> <!--TURNO-->
+            <span class="fila__div--turno items-center">
+              <!--<svg class="h-10 w-10 " url="./assets/icons/icon-o.svg"></svg>-->
+              <img class="object-scale-down h-5 filter grayscale " v-if="jugador === 'X'" src="./assets/icons/icon-x.svg" alt="X">
+              <img class="object-scale-down h-5 filter grayscale" v-if="jugador === 'O'" src="./assets/icons/icon-o.svg" alt="O">
+              <p>TURN</p>
+            </span>
+            
+          </div><!--RESET-->
+          <div class="fila__div flex-row-reverse ">
+            <span class="fila__div--restart bg-gray-100 hover:bg-gray-200 " @click="reset()">
+              <svg class="icon_restart h-10 w-10"></svg>
+            </span>
+            
+          </div>
+  
         </div>
-        <div class="fila__div"> <!--TURNO-->
-          <span class="fila__div--turno items-center">
-            <img class="object-scale-down h-5 h-5 filter grayscale " v-if="jugador === 'X'" src="./assets/icons/icon-x.svg" alt="X">
-            <img class="object-scale-down h-5 h-5 filter grayscale" v-if="jugador === 'O'" src="./assets/icons/icon-o.svg" alt="O">
-            <p>TURN</p>
-          </span>
-        </div><!--RESET-->
-        <div class="fila__div flex-row-reverse ">
-          <span class="fila__div--restart bg-gray-100 hover:bg-gray-200 " @click="reset()">
-            <svg class="icon_restart h-10 w-10"></svg>
-          </span>          
+  
+        <!--CASILLAS-->
+        <div v-for="(fila,x) in tablero" :key="x" class="tablero__fila">
+          <div v-for="(col,y) in fila" :key="y" class="tablero__fila__casilla :"
+          :class="{'hover:icon_x_outline':jugador==='X' && showOutline===true && col==='',
+          'hover:icon_o_outline':jugador==='O' && showOutline===true && col===''}"
+           @click="jugada(x,y)" @mouseenter="showOutline=true" @mouseleave="showOutline=false">
+              <img class="object-scale-down" v-if="col === 'X'" src="./assets/icons/icon-x.svg" alt="X">
+              <img class="object-scale-down" v-if="col === 'O'" src="./assets/icons/icon-o.svg" alt="O">
+              <!--
+              <img class="object-scale-down" v-show="showOutline && !ganador" v-if="jugador === 'X' && col===''" src="./assets/icons/icon-x-outline.svg" alt="">
+              <img class="object-scale-down" v-show="showOutline && !ganador" v-if="jugador === 'O' && col===''" src="./assets/icons/icon-o-outline.svg" alt="">
+              -->
+          </div>
+        </div>
+  
+        <div class="tablero__score">
+          <span class=" cuadro--texto bg-blue-200 tablero__score__cuadro"><p>X (YOU)</p><p>{{ contX }}</p></span> <!--TODO hacer dinamico-->
+          <span class=" bg-gray-100 tablero__score__cuadro"><p>TIES</p><p>{{ contTie }}</p></span>
+          <span class=" bg-yellow-200 tablero__score__cuadro"><p>Y (CPU)</p><p>{{ contO }}</p></span>
         </div>
       </div>
-      <!--CASILLAS-->
-      <div v-for="(fila,x) in tablero" :key="x" className="tablero__fila">
-        <div v-for="(col,y) in fila" :key="y" className="tablero__fila__casilla hover:bg-yellow-500" @click="jugada(x,y)">
-            <img class="object-scale-down" v-if="col === 'X'" src="./assets/icons/icon-x.svg" alt="X">
-            <img class="object-scale-down" v-if="col === 'O'" src="./assets/icons/icon-o.svg" alt="O">
-        </div>
-      </div>
-      <div class="tablero__score">
-        <span class=" cuadro--texto bg-blue-200 tablero__score__cuadro"><p>X (YOU)</p><p>0</p></span> <!--TODO hacer dinamico-->
-        <span class=" bg-gray-100 tablero__score__cuadro"><p>TIES</p><p>0</p></span>
-        <span class=" bg-yellow-200 tablero__score__cuadro"><p>Y (CPU)</p><p>0</p></span>
-      </div>
-    </div>
     <!--DISPLAY DE GANADOR--> 
 
     <div v-if="isGameOver" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -113,12 +135,12 @@ import Button from '../components/Button.vue'
           <img class="m-8" v-else-if="ganador === 'O'" src="./assets/icons/icon-o.svg">
           <span class="text-center" :style="{ color: ganador === 'X' ? '#65E9E4' : '#F2B137' }">TAKES THE ROUND</span>
         </h2>
-        <Button class="bg-gray-300 text-gray-800 py-2 px-4 h-14 rounded-lg border-none m-8 text-lg font-bold cursor-pointer shadow-md hover:bg-yellow-500 hover:text-gray-700 focus:outline-none" v-on:click="reset(); isGameOver=false">
+        <button class="bg-gray-300 text-gray-800 py-2 px-4 h-14 rounded-lg border-none m-8 text-lg font-bold cursor-pointer shadow-md hover:bg-yellow-500 hover:text-gray-700 focus:outline-none" v-on:click="reset(); isGameOver=false">
           Quitar
-        </Button>
-        <Button class="bg-yellow-400 text-gray-800 py-1 px-4 h-14 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-gray-100" v-on:click="reset(); isGameOver=false">
+        </button>
+        <button class="bg-yellow-400 text-gray-800 py-1 px-4 h-14 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-gray-100" v-on:click="reset(); isGameOver=false">
           Siguiente Ronda
-        </Button>
+        </button>
       </div>
     </div>
   </main>
