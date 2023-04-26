@@ -128,7 +128,7 @@
     <div v-if="isGameOver" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div class="bg-blue-400 shadow-lg rounded-lg p-6 w-3/4">
         <div>
-          <h3 class="text-2x1 font-bold">PLAYER {{ ganador }} WON</h3>
+          <h3 class="text-2x1 font-bold"><span v-if="!ganador" class="text-2x1 font-bold"> NO </span> PLAYER {{ ganador }} WON</h3>
         </div>
         <h2 class="text-4xl font-bold text-bg-blue-400 mb-0 mt-12 flex items-center justify-center" v-if="ganador">
           <img class="m-8" v-if="ganador === 'X'" src="./assets/icons/icon-x.svg">
