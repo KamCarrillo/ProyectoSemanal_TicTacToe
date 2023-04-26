@@ -13,7 +13,7 @@
     const tablero = ref([
       ["","",""], //0 1 2
       ["","",""], //3 4 5
-      ["","",""]  //6 7
+      ["","",""]  //6 7 8
     ])
 
     const calculateWinner = (tablero) => {
