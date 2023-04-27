@@ -3,8 +3,14 @@
     //import GameOver from './components/modals/GameOver.vue'
 
     defineProps({
-        playerChoice:String,
-        AIplayer:Boolean,
+        playerChoice:{
+            type:String,
+            default: "X",
+        },
+        AIplayer:{
+            type:Boolean,
+            default: false,
+        },
     })
 
     const tablero = ref([
@@ -30,106 +36,59 @@
     }
 
 
-    function multijugador(){
-        const jugador = ref("X");
+    const jugador = ref("X");
 
-        const contX = ref(0)
-        const contO = ref(0)
-        const contTie = ref(0)
+    const contX = ref(0)
+    const contO = ref(0)
+    const contTie = ref(0)
 
-        const showOutline = ref(false)
+    const showOutline = ref(false)
 
-        const ganador = computed(() => calculateWinner(tablero.value.flat()));
+    const ganador = computed(() => calculateWinner(tablero.value.flat()));
 
-        const isGameOver = ref(false)
+    const isGameOver = ref(false)
 
-        const jugada = (x, y) => {
-            if (ganador.value) return;
-            if (tablero.value[x][y] !== "") return;
+    const jugada = (x, y) => {
+        //console.log(this.AIplayer)
+        //console.log(this.playerChoice)
 
-            tablero.value[x][y] = jugador.value;
+        if (ganador.value) return;
+        if (tablero.value[x][y] !== "") return;
 
-            if (calculateWinner(tablero.value.flat())) {
-            isGameOver.value = true;
-            console.log(playerChoice)
-            //console.log(jugador.value);
-            if (jugador.value === 'X') {
-                contX.value++;
-            } else if (jugador.value === 'O') {
-                contO.value++;
-            }
-            } else if (tablero.value.flat().every((val) => val != "")) {
-            isGameOver.value = true;
-            contTie.value++;
-            }
+        tablero.value[x][y] = jugador.value;
 
-
-            jugador.value = jugador.value === "X" ? "O" : "X";
+        if (calculateWinner(tablero.value.flat())) {
+        isGameOver.value = true;
+        if (jugador.value === 'X') {
+            contX.value++;
+        } else if (jugador.value === 'O') {
+            contO.value++;
+        }
+        } else if (tablero.value.flat().every((val) => val != "")) {
+        isGameOver.value = true;
+        contTie.value++;
         }
 
-        const reset = () => {
-            tablero.value = [
-            ["", "", ""],
-            ["", "", ""],
-            ["", "", ""]
-            ];
-            jugador.value = "X"
-        }
+        jugador.value = jugador.value === "X" ? "O" : "X";
 
+        if (jugador.value === "O" && !isGameOver.value) {
+        let x, y;
+        do {
+            x = Math.floor(Math.random() * 3);
+            y = Math.floor(Math.random() * 3);
+        } while (tablero.value[x][y] != "");
+        jugada(x, y);
+        }
     }
 
-    function computadora() {
-        const jugador = ref("X");
-
-        const contX = ref(0)
-        const contO = ref(0)
-        const contTie = ref(0)
-
-        const showOutline = ref(false)
-
-        const ganador = computed(() => calculateWinner(tablero.value.flat()));
-
-        const isGameOver = ref(false)
-
-        const jugada = (x, y) => {
-            if (ganador.value) return;
-            if (tablero.value[x][y] !== "") return;
-
-            tablero.value[x][y] = jugador.value;
-
-            if (calculateWinner(tablero.value.flat())) {
-            isGameOver.value = true;
-            if (jugador.value === 'X') {
-                contX.value++;
-            } else if (jugador.value === 'O') {
-                contO.value++;
-            }
-            } else if (tablero.value.flat().every((val) => val != "")) {
-            isGameOver.value = true;
-            contTie.value++;
-            }
-
-            jugador.value = jugador.value === "X" ? "O" : "X";
-
-            if (jugador.value === "O" && !isGameOver.value) {
-            let x, y;
-            do {
-                x = Math.floor(Math.random() * 3);
-                y = Math.floor(Math.random() * 3);
-            } while (tablero.value[x][y] != "");
-            jugada(x, y);
-            }
-        }
-
-        const reset = () => {
-            tablero.value = [
-            ["", "", ""],
-            ["", "", ""],
-            ["", "", ""]
-            ];
-            jugador.value = "X";
-            isGameOver.value = false;
-        }
+    const reset = () => {
+        tablero.value = [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+        ];
+        jugador.value = "X";
+        isGameOver.value = false;
     }
 </script>
 
@@ -205,8 +164,8 @@
             WON</h3>
         </div>
         <h2 class="text-4xl font-bold text-bg-blue-400 mb-0 mt-12 flex items-center justify-center" v-if="ganador">
-          <img class="m-8" v-if="ganador === 'X'" src="./assets/icons/icon-x.svg">
-          <img class="m-8" v-else-if="ganador === 'O'" src="./assets/icons/icon-o.svg">
+          <img class="m-8" v-if="ganador === 'X'" src="../assets/icons/icon-x.svg">
+          <img class="m-8" v-else-if="ganador === 'O'" src="../assets/icons/icon-o.svg">
           <span class="text-center" :style="{ color: ganador === 'X' ? '#65E9E4' : '#F2B137' }">TAKES THE ROUND</span>
         </h2>
         <!--<router-link to="/" class="w-1/2 bg-gray-100 text-gray-800 py-1 px-4 h-12 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-yellow-400">QUITAR</router-link>

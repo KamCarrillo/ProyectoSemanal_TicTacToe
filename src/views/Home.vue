@@ -62,5 +62,6 @@
 import { ref } from 'vue';
 
   const playerChoice=ref('X')
+  const AIplayer=ref(false)
 //export default {};
 </script>
