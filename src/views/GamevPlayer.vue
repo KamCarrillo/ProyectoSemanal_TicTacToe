@@ -159,12 +159,12 @@
           <img class="m-8" v-else-if="ganador === 'O'" src="../assets/icons/icon-o.svg">
           <span class="text-center" :style="{ color: ganador === 'X' ? '#65E9E4' : '#F2B137' }">TAKES THE ROUND</span>
         </h2>
-        <!--<router-link to="/" class="w-1/2 bg-gray-100 text-gray-800 py-1 px-4 h-12 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-yellow-400">QUITAR</router-link>
-        <router-view/>-->
+        <router-link to="/" class="w-1/2 bg-gray-100 text-gray-800 py-1 px-4 h-12 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-yellow-400 mr-3">QUIT</router-link>
+        <router-view/>
         <button
           class="bg-yellow-400 text-gray-800 py-1 px-4 h-14 rounded-md border-none text-lg font-bold cursor-pointer shadow-md hover:bg-gray-100"
           v-on:click="reset(); isGameOver = false">
-          Siguiente Ronda
+          NEXT ROUND
         </button>
       </div>
     </div>
