@@ -8,6 +8,10 @@ import Game from './App.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
+        {
+            path: "/:catchAll(.*)",
+            redirect: { name: "home" },
+          },
         { 
             path: '/', 
             name:'home',
@@ -16,11 +20,9 @@ const router = createRouter({
         {
             path: '/game',
             name: 'game',
-            component: Game
-        }
+            component: () => import('../src/views/Game.vue'),
+        },
     ],
 });
 
-const app = createApp(Home);
-app.use(router);
-app.mount('#app');
+const app = createApp(App).use(router).mount('#app');
