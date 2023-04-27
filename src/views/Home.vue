@@ -17,14 +17,14 @@
         <h2 class="mt-3 text-gray-200 text-sm">PICK PLAYER 1´S MARK</h2>
         <div class="pick-side bg-blue-300 h-[72px] w-[412px] flex items-center mt-5 m-2 justify-center rounded-3xl">
           <div class="flex items-center justify-between bar mx-5">
-            <button class="button-a flex mx-9 hover:bg-gray-200">
+            <button class="button-a flex mx-9 hover:bg-gray-200" @click="playerChoice='X'">
               <svg class="align-top" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M15.002 1.147 32 18.145 48.998 1.147a3 3 0 0 1 4.243 0l9.612 9.612a3 3 0 0 1 0 4.243L45.855 32l16.998 16.998a3 3 0 0 1 0 4.243l-9.612 9.612a3 3 0 0 1-4.243 0L32 45.855 15.002 62.853a3 3 0 0 1-4.243 0L1.147 53.24a3 3 0 0 1 0-4.243L18.145 32 1.147 15.002a3 3 0 0 1 0-4.243l9.612-9.612a3 3 0 0 1 4.243 0Z"
                   fill="#DBE8ED" fill-rule="evenodd" />
               </svg>
             </button>
-            <button class="button-b mx-12">
+            <button class="button-b mx-12" @click="playerChoice='O'">
               <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M32 0c17.673 0 32 14.327 32 32 0 17.673-14.327 32-32 32C14.327 64 0 49.673 0 32 0 14.327 14.327 0 32 0Zm0 18.963c-7.2 0-13.037 5.837-13.037 13.037 0 7.2 5.837 13.037 13.037 13.037 7.2 0 13.037-5.837 13.037-13.037 0-7.2-5.837-13.037-13.037-13.037Z"
@@ -38,20 +38,29 @@
       </div>
       <br />
       <div class="boton-menu-container">
-        <button @click="computadora()"
-          class="boton w-[400px] bg-yellow-200 px-8 py-4 text-lg text-gray-800 rounded-lg font-bold cursor-pointer m-5 shadow-md hover:bg-gray-200">
-          NEW GAME (VS CPU)
-        </button>
+        <router-link to="/game" :playerChoice="playerChoice" :AIplayer="true"> 
+          <button @click="computadora()"
+            class="boton w-[400px] bg-yellow-200 px-8 py-4 text-lg text-gray-800 rounded-lg font-bold cursor-pointer m-5 shadow-md hover:bg-gray-200">
+            NEW GAME (VS CPU) 
+          </button>
+        </router-link>
       </div>
       <br />
       <div class="boton-menu-container">
-        <button @click="multijugador()"
-          class="boton w-[400px] bg-blue-200 px-8 py-4 text-lg text-gray-800 rounded-lg font-bold cursor-pointer m-0 shadow hover:bg-gray-200">
-          NEW GAME (VS PLAYER)
-        </button>
+        <router-link to="/game" :playerChoice="playerChoice" :AIplayer="false">
+          <button @click="multijugador()"
+            class="boton w-[400px] bg-blue-200 px-8 py-4 text-lg text-gray-800 rounded-lg font-bold cursor-pointer m-0 shadow hover:bg-gray-200">
+            NEW GAME (VS CPU) 
+          </button>
+        </router-link>
       </div>
   </div>
-</main></template>
-<script>
-export default {};
+</main>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+  const playerChoice=ref('X')
+//export default {};
 </script>
