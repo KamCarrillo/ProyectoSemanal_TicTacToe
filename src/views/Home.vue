@@ -39,7 +39,7 @@
       <br />
       <div class="boton-menu-container">
         <router-link to="/game" :playerChoice="playerChoice" :AIplayer="true"> 
-          <button @click="computadora()"
+          <button
             class="boton w-[400px] bg-yellow-200 px-8 py-4 text-lg text-gray-800 rounded-lg font-bold cursor-pointer m-5 shadow-md hover:bg-gray-200">
             NEW GAME (VS CPU) 
           </button>
@@ -47,10 +47,10 @@
       </div>
       <br />
       <div class="boton-menu-container">
-        <router-link to="/game" :playerChoice="playerChoice" :AIplayer="false">
-          <button @click="multijugador()"
+        <router-link to="/gamevPlayer" :playerChoice="playerChoice" :AIplayer="false">
+          <button
             class="boton w-[400px] bg-blue-200 px-8 py-4 text-lg text-gray-800 rounded-lg font-bold cursor-pointer m-0 shadow hover:bg-gray-200">
-            NEW GAME (VS CPU) 
+            NEW GAME (VS PLAYER) 
           </button>
         </router-link>
       </div>
